@@ -1,6 +1,9 @@
-﻿using Microsoft.Win32;
+﻿using CommandDecoder.Models;
+using Microsoft.Win32;
+using Ookii.Dialogs.Wpf;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +24,13 @@ namespace CommandDecoder
     /// </summary>
     public partial class MainWindow : Window
     {
+        private PackageMetadata packageMetadata;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            packageMetadata = new PackageMetadata();
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -36,6 +43,27 @@ namespace CommandDecoder
             var dialog = new OpenFileDialog();
             dialog.Filter = "Carbon package|*.cbp";
             dialog.ShowDialog();
+
+            var fileContent = File.ReadAllBytes(dialog.FileName);
+
+            packageMetadata = CbpManager.ReadMetadata(fileContent);
+        }
+
+        private void ViewMetadataButton_Click(object sender, RoutedEventArgs e)
+        {
+            new TaskDialog
+            {
+                WindowTitle = "Package Metadata - cmdec",
+                MainInstruction = "Package metadata",
+                MainIcon = TaskDialogIcon.Information,
+                Buttons = { new TaskDialogButton("Okay") },
+                ButtonStyle = TaskDialogButtonStyle.CommandLinks,
+                Content = $"Variable slot alignment: {packageMetadata.VariableSlotAlignment} \n" +
+                $"Data slignment: {packageMetadata.DataAlignment} \n" +
+                $"Command alignment: {packageMetadata.CommandAlignment} \n" +
+                $"Entry point offset: {packageMetadata.EntryPointOffset} \n" +
+                $"Domain layer count alignment: {packageMetadata.DomainLayerCountAlignment}"
+            }.ShowDialog();
         }
     }
 }

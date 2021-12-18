@@ -16,13 +16,15 @@
                     <MenuItem x:Name="ExitButton" Click="ExitButton_Click" Header="Exit"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="Edit"></MenuItem>
-                <MenuItem Header="View"></MenuItem>
+                <MenuItem Header="View">
+                    <MenuItem x:Name="ViewMetadataButton" Click="ViewMetadataButton_Click" Header="Package metadata"></MenuItem>
+                </MenuItem>
             </Menu>
 
             <StatusBar Background="#006CBE" Foreground="White" DockPanel.Dock="Bottom">
-                <StatusBarItem>
-                    <TextBlock>Ready</TextBlock>
-                </StatusBarItem>
+                    <StatusBarItem DockPanel.Dock="Left">
+                        <TextBlock>Ready</TextBlock>
+                    </StatusBarItem>
             </StatusBar>
             <DataGrid/>
         </DockPanel>
