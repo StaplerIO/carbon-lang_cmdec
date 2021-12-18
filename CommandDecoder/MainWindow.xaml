@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CommandDecoder"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="CommandDecoder" Height="450" Width="800">
     <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="File">
+                    <MenuItem x:Name="OpenPackageButton" Click="OpenPackageButton_Click" Header="Open"></MenuItem>
+                    <MenuItem Header="Close"></MenuItem>
+                    <Separator/>
+                    <MenuItem x:Name="ExitButton" Click="ExitButton_Click" Header="Exit"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Edit"></MenuItem>
+                <MenuItem Header="View"></MenuItem>
+            </Menu>
 
+            <StatusBar Background="#006CBE" Foreground="White" DockPanel.Dock="Bottom">
+                <StatusBarItem>
+                    <TextBlock>Ready</TextBlock>
+                </StatusBarItem>
+            </StatusBar>
+            <DataGrid/>
+        </DockPanel>
     </Grid>
 </Window>
