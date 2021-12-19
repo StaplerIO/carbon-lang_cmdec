@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CommandDecoder.Model
+namespace CommandDecoder.Models
 {
     public class CommandTableEntry
     {
-        public long Location { get; set; }
+        public int Location { get; set; }
 
         public byte[] RawData { get; set; }
+
+        public string Description { get; set; }
     }
 }

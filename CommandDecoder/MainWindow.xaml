@@ -26,7 +26,7 @@
                         <TextBlock>Ready</TextBlock>
                     </StatusBarItem>
             </StatusBar>
-            <DataGrid/>
+            <DataGrid x:Name="CommandDataGrid" FontFamily="Consolas" IsReadOnly="True"/>
         </DockPanel>
     </Grid>
 </Window>
