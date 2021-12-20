@@ -58,7 +58,12 @@ namespace CommandDecoder
                         index += result.Length;
                         break;
                     case 0xF1:
-                        result = MathCommandDecoder.DecodeCalcCommand(content, metadata, index);
+                        result = MathCommandDecoder.DecodeCalcCommand(content, index);
+                        commands.Add(result.Command);
+                        index += result.Length;
+                        break;
+                    case 0xF2:
+                        result = MathCommandDecoder.DecodeLogicalCommand(content, index);
                         commands.Add(result.Command);
                         index += result.Length;
                         break;
