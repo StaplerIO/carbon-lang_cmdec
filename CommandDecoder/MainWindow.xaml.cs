@@ -14,7 +14,7 @@ namespace CommandDecoder
     public partial class MainWindow : Window
     {
         private PackageMetadata packageMetadata;
-        private DataTable commandTable;
+        private readonly DataTable commandTable;
 
         public MainWindow()
         {
@@ -32,22 +32,27 @@ namespace CommandDecoder
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
+            StatusBarText.Text = "Shutting down...";
+
             Application.Current.Shutdown();
         }
 
         private void OpenPackageButton_Click(object sender, RoutedEventArgs e)
         {
+            StatusBarText.Text = "Opening file...";
             var dialog = new OpenFileDialog();
             dialog.Filter = "Carbon package|*.cbp";
             dialog.ShowDialog();
 
             var fileContent = File.ReadAllBytes(dialog.FileName);
 
+            StatusBarText.Text = "Decoding commands...";
             packageMetadata = CbpManager.ReadMetadata(fileContent);
 
             var decodedCommands = CbpManager.DecodeCommands(fileContent[packageMetadata.EntryPointOffset..], packageMetadata);
 
             // Update command table
+            commandTable.Clear();
             decodedCommands.ForEach(command =>
             {
                 string rawData = "";
@@ -55,11 +60,13 @@ namespace CommandDecoder
                 {
                     var str = Convert.ToString(item, 16).PadLeft(2, '0');
 
-                    rawData += str;
+                    rawData += str + ' ';
                 }
 
-                commandTable.Rows.Add($"0x{Convert.ToString(command.Location, 16).PadLeft(8, '0')} ({command.Location})", $"0x{rawData.ToUpper()}", command.Description);
+                commandTable.Rows.Add($"0x{Convert.ToString(command.Location, 16).PadLeft(8, '0')} ({command.Location})", $"{rawData.ToUpper()}", command.Description);
             });
+
+            StatusBarText.Text = "Ready";
         }
 
         private void ViewMetadataButton_Click(object sender, RoutedEventArgs e)

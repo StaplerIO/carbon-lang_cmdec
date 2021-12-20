@@ -22,11 +22,11 @@
             </Menu>
 
             <StatusBar Background="#006CBE" Foreground="White" DockPanel.Dock="Bottom">
-                    <StatusBarItem DockPanel.Dock="Left">
-                        <TextBlock>Ready</TextBlock>
+                    <StatusBarItem>
+                        <TextBlock x:Name="StatusBarText">Ready</TextBlock>
                     </StatusBarItem>
             </StatusBar>
-            <DataGrid x:Name="CommandDataGrid" FontFamily="Consolas" IsReadOnly="True"/>
+            <DataGrid x:Name="CommandDataGrid" FontFamily="Consolas" CanUserAddRows="False" IsReadOnly="True"></DataGrid>
         </DockPanel>
     </Grid>
 </Window>
