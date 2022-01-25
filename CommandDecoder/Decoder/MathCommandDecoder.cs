@@ -50,6 +50,13 @@ namespace CommandDecoder.Decoder
                         RawData = stream[0..2],
                         Description = "Modulo 2 values on the top of the stack"
                     });
+                case 0x06:
+                    return new(2, new CommandTableEntry
+                    {
+                        Location = baseIndex,
+                        RawData = stream[0..2],
+                        Description = "Inverse the top value of the stack"
+                    });
                 default:
                     throw new InvalidOperationException("No such math command");
             }
