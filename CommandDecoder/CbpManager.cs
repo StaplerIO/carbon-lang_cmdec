@@ -19,8 +19,8 @@ namespace CommandDecoder
                     VariableSlotAlignment = content[0],
                     DataAlignment = content[1],
                     CommandAlignment = content[2],
-                    EntryPointOffset = content[3],
-                    DomainLayerCountAlignment = content[4],
+                    DomainLayerCountAlignment = content[3],
+                    EntryPointOffset = content[4],
                 };
             }
 
@@ -32,7 +32,7 @@ namespace CommandDecoder
             var commands = new List<CommandTableEntry>();
 
             var index = 0;
-            while (index <= content.Length && content[index] != 0x00)
+            while (index <= content.Length)
             {
                 DecodeResult result;
                 switch (content[index])
