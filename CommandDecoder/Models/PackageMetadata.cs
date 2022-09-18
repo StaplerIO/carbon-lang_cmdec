@@ -17,5 +17,7 @@ namespace CommandDecoder.Models
         public byte EntryPointOffset { get; set; }
 
         public byte DomainLayerCountAlignment { get; set; }
+
+        public byte AddressAlignment { get; set; }
     }
 }

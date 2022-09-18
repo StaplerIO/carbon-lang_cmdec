@@ -57,6 +57,16 @@ namespace CommandDecoder
                         commands.Add(result.Command);
                         index += result.Length;
                         break;
+                    case 0xD1:
+                        result = JumpCommandDecoder.DecodeDirectJumpCommand(content, metadata, index);
+                        commands.Add(result.Command);
+                        index += result.Length;
+                        break;
+                    case 0xD2:
+                        result = JumpCommandDecoder.DecodeConditionalJumpCommand(content, metadata, index);
+                        commands.Add(result.Command);
+                        index += result.Length;
+                        break;
                     case 0xF1:
                         result = MathCommandDecoder.DecodeCalcCommand(content, index);
                         commands.Add(result.Command);
