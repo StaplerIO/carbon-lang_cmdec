@@ -47,6 +47,7 @@ namespace CommandDecoder
                         commands.Add(result.Command);
                         index += result.Length;
                         break;
+
                     case 0xB1:
                         result = StackCommandDecoder.PushCommand(content, metadata, index);
                         commands.Add(result.Command);
@@ -67,6 +68,7 @@ namespace CommandDecoder
                         commands.Add(result.Command);
                         index += result.Length;
                         break;
+
                     case 0xD1:
                         result = JumpCommandDecoder.DecodeDirectJumpCommand(content, metadata, index);
                         commands.Add(result.Command);
@@ -76,7 +78,24 @@ namespace CommandDecoder
                         result = JumpCommandDecoder.DecodeConditionalJumpCommand(content, metadata, index);
                         commands.Add(result.Command);
                         index += result.Length;
+
                         break;
+                    case 0xE1:
+                        result = FunctionCommandDecoder.EnterFunction(content, metadata, index);
+                        commands.Add(result.Command);
+                        index += result.Length;
+                        break;
+                    case 0xE2:
+                        result = FunctionCommandDecoder.LeaveFunctionWithoutValue(content, index);
+                        commands.Add(result.Command);
+                        index += result.Length;
+                        break;
+                    case 0xE3:
+                        result = FunctionCommandDecoder.LeaveFunctionWithValue(content, index);
+                        commands.Add(result.Command);
+                        index += result.Length;
+                        break;
+
                     case 0xF1:
                         result = MathCommandDecoder.DecodeCalcCommand(content, index);
                         commands.Add(result.Command);
