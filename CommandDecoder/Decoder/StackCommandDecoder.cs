@@ -21,6 +21,18 @@ namespace CommandDecoder.Decoder
             });
         }
 
+        public static DecodeResult PushFromObjectCommand(byte[] stream, PackageMetadata metadata, int baseIndex)
+        {
+            stream = stream[baseIndex..];
+
+            return new(2 + metadata.VariableSlotAlignment, new CommandTableEntry
+            {
+                Location = baseIndex,
+                RawData = stream[0..(2 + metadata.VariableSlotAlignment)],
+                Description = $"Push data from variable"
+            });
+        }
+
         public static DecodeResult PopToObjectCommand(byte[] stream, PackageMetadata metadata, int baseIndex)
         {
             stream = stream[baseIndex..];
@@ -30,6 +42,18 @@ namespace CommandDecoder.Decoder
                 Location = baseIndex,
                 RawData = stream[0..(2 + metadata.VariableSlotAlignment)],
                 Description = $"Pop data from stack to data slot"
+            });
+        }
+
+        public static DecodeResult PopCommand(byte[] stream, PackageMetadata metadata, int baseIndex)
+        {
+            stream = stream[baseIndex..];
+
+            return new(1, new CommandTableEntry
+            {
+                Location = baseIndex,
+                RawData = stream[0..1],
+                Description = $"Pop data from stack to air"
             });
         }
     }

@@ -52,6 +52,16 @@ namespace CommandDecoder
                         commands.Add(result.Command);
                         index += result.Length;
                         break;
+                    case 0xB2:
+                        result = StackCommandDecoder.PushFromObjectCommand(content, metadata, index);
+                        commands.Add(result.Command);
+                        index += result.Length;
+                        break;
+                    case 0xB3:
+                        result = StackCommandDecoder.PopCommand(content, metadata, index);
+                        commands.Add(result.Command);
+                        index += result.Length;
+                        break;
                     case 0xB4:
                         result = StackCommandDecoder.PopToObjectCommand(content, metadata, index);
                         commands.Add(result.Command);
