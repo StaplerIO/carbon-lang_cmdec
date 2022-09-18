@@ -69,6 +69,17 @@ namespace CommandDecoder
                         index += result.Length;
                         break;
 
+                    case 0xC1:
+                        result = DomainCommandDecoder.CreateDomainCommand(content, metadata, index);
+                        commands.Add(result.Command);
+                        index += result.Length;
+                        break;
+                    case 0xC2:
+                        result = DomainCommandDecoder.DestroyDomainCommand(content, metadata, index);
+                        commands.Add(result.Command);
+                        index += result.Length;
+                        break;
+
                     case 0xD1:
                         result = JumpCommandDecoder.DecodeDirectJumpCommand(content, metadata, index);
                         commands.Add(result.Command);
