@@ -44,29 +44,32 @@ namespace CommandDecoder
             dialog.Filter = "Carbon package|*.cbp";
             dialog.ShowDialog();
 
-            var fileContent = File.ReadAllBytes(dialog.FileName);
-
-            StatusBarText.Text = "Decoding commands...";
-            packageMetadata = CbpManager.ReadMetadata(fileContent);
-
-            var decodedCommands = CbpManager.DecodeCommands(fileContent[packageMetadata.EntryPointOffset..], packageMetadata);
-
-            // Update command table
-            commandTable.Clear();
-            decodedCommands.ForEach(command =>
+            if (dialog.FileName != null)
             {
-                string rawData = "";
-                foreach (var item in command.RawData)
+                var fileContent = File.ReadAllBytes(dialog.FileName);
+
+                StatusBarText.Text = "Decoding commands...";
+                packageMetadata = CbpManager.ReadMetadata(fileContent);
+
+                var decodedCommands = CbpManager.DecodeCommands(fileContent[packageMetadata.EntryPointOffset..], packageMetadata);
+
+                // Update command table
+                commandTable.Clear();
+                decodedCommands.ForEach(command =>
                 {
-                    var str = Convert.ToString(item, 16).PadLeft(2, '0');
+                    string rawData = "";
+                    foreach (var item in command.RawData)
+                    {
+                        var str = Convert.ToString(item, 16).PadLeft(2, '0');
 
-                    rawData += str + ' ';
-                }
+                        rawData += str + ' ';
+                    }
 
-                commandTable.Rows.Add($"0x{Convert.ToString(command.Location, 16).PadLeft(8, '0')} ({command.Location})", $"{rawData.ToUpper()}", command.Description);
-            });
+                    commandTable.Rows.Add($"0x{Convert.ToString(command.Location, 16).PadLeft(8, '0')} ({command.Location})", $"{rawData.ToUpper()}", command.Description);
+                });
 
-            StatusBarText.Text = "Ready";
+                StatusBarText.Text = "Ready";
+            }
         }
 
         private void ViewMetadataButton_Click(object sender, RoutedEventArgs e)
