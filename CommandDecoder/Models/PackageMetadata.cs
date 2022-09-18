@@ -8,15 +8,15 @@ namespace CommandDecoder.Models
 {
     public class PackageMetadata
     {
-        public byte VariableSlotAlignment { get; set; }
-        
+        public byte PackageType { get; set; }
+
         public byte DataAlignment { get; set; }
 
-        public byte CommandAlignment { get; set; }
-
-        public byte EntryPointOffset { get; set; }
-
         public byte DomainLayerCountAlignment { get; set; }
+
+        public byte DataSlotAlignment { get; set; }
+
+        public byte EntryPointAddress { get; set; }
 
         public byte AddressAlignment { get; set; }
     }

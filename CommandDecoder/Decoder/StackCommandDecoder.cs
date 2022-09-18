@@ -25,10 +25,10 @@ namespace CommandDecoder.Decoder
         {
             stream = stream[baseIndex..];
 
-            return new(2 + metadata.VariableSlotAlignment, new CommandTableEntry
+            return new(2 + metadata.DataSlotAlignment, new CommandTableEntry
             {
                 Location = baseIndex,
-                RawData = stream[0..(2 + metadata.VariableSlotAlignment)],
+                RawData = stream[0..(2 + metadata.DataSlotAlignment)],
                 Description = $"Push data from variable"
             });
         }
@@ -37,10 +37,10 @@ namespace CommandDecoder.Decoder
         {
             stream = stream[baseIndex..];
 
-            return new(2 + metadata.VariableSlotAlignment, new CommandTableEntry
+            return new(2 + metadata.DataSlotAlignment, new CommandTableEntry
             {
                 Location = baseIndex,
-                RawData = stream[0..(2 + metadata.VariableSlotAlignment)],
+                RawData = stream[0..(2 + metadata.DataSlotAlignment)],
                 Description = $"Pop data from stack to data slot"
             });
         }

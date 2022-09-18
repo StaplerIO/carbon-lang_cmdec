@@ -16,11 +16,11 @@ namespace CommandDecoder
             {
                 return new PackageMetadata
                 {
-                    VariableSlotAlignment = content[0],
+                    PackageType = content[0],
                     DataAlignment = content[1],
-                    CommandAlignment = content[2],
-                    DomainLayerCountAlignment = content[3],
-                    EntryPointOffset = content[4],
+                    DomainLayerCountAlignment = content[2],
+                    DataSlotAlignment = content[3],
+                    AddressAlignment = content[4],
                 };
             }
 

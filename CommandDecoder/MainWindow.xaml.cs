@@ -51,7 +51,7 @@ namespace CommandDecoder
                 StatusBarText.Text = "Decoding commands...";
                 packageMetadata = CbpManager.ReadMetadata(fileContent);
 
-                var decodedCommands = CbpManager.DecodeCommands(fileContent[packageMetadata.EntryPointOffset..], packageMetadata);
+                var decodedCommands = CbpManager.DecodeCommands(fileContent[packageMetadata.EntryPointAddress..], packageMetadata);
 
                 // Update command table
                 commandTable.Clear();
@@ -81,11 +81,11 @@ namespace CommandDecoder
                 MainIcon = TaskDialogIcon.Information,
                 Buttons = { new TaskDialogButton("Okay") },
                 ButtonStyle = TaskDialogButtonStyle.CommandLinks,
-                Content = $"Variable slot alignment: {packageMetadata.VariableSlotAlignment} \n" +
-                $"Data slignment: {packageMetadata.DataAlignment} \n" +
-                $"Command alignment: {packageMetadata.CommandAlignment} \n" +
-                $"Entry point offset: {packageMetadata.EntryPointOffset} \n" +
-                $"Domain layer count alignment: {packageMetadata.DomainLayerCountAlignment}"
+                Content = $"Data slot alignment: {packageMetadata.DataSlotAlignment} \n" +
+                          $"Data slignment: {packageMetadata.DataAlignment} \n" +
+                          $"Address alignment: {packageMetadata.AddressAlignment} \n" +
+                          $"Entry point address: {packageMetadata.EntryPointAddress} \n" +
+                          $"Domain layer count alignment: {packageMetadata.DomainLayerCountAlignment}"
             }.ShowDialog();
         }
     }

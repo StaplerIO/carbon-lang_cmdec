@@ -28,21 +28,21 @@ namespace CommandDecoder.Decoder
             if (stream[1] == 0x10)
             {
                 // Data is saved on public area
-                return new(2 + metadata.VariableSlotAlignment, new CommandTableEntry
+                return new(2 + metadata.DataSlotAlignment, new CommandTableEntry
                 {
                     Location = baseIndex,
-                    RawData = stream[0..(2 + metadata.VariableSlotAlignment)],
-                    Description = $"Destroy a public object on slot 0x{BitConverter.ToString(stream[2..(metadata.VariableSlotAlignment + 2)]).Replace("-", string.Empty)}"
+                    RawData = stream[0..(2 + metadata.DataSlotAlignment)],
+                    Description = $"Destroy a public object on slot 0x{BitConverter.ToString(stream[2..(metadata.DataSlotAlignment + 2)]).Replace("-", string.Empty)}"
                 });
             }
             else
             {
                 // This is a private data
-                return new(2 + metadata.DomainLayerCountAlignment + metadata.VariableSlotAlignment, new CommandTableEntry
+                return new(2 + metadata.DomainLayerCountAlignment + metadata.DataSlotAlignment, new CommandTableEntry
                 {
                     Location = baseIndex,
-                    RawData = stream[0..(2 + metadata.VariableSlotAlignment)],
-                    Description = $"Destroy a private object on slot 0x{BitConverter.ToString(stream[2..(metadata.VariableSlotAlignment + 2)]).Replace("-", string.Empty)}"
+                    RawData = stream[0..(2 + metadata.DataSlotAlignment)],
+                    Description = $"Destroy a private object on slot 0x{BitConverter.ToString(stream[2..(metadata.DataSlotAlignment + 2)]).Replace("-", string.Empty)}"
                 });
             }
         }
