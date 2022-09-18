@@ -31,8 +31,8 @@ namespace CommandDecoder
         {
             var commands = new List<CommandTableEntry>();
 
-            var index = 0;
-            while (index <= content.Length)
+            var index = 5;
+            while (index < content.Length)
             {
                 DecodeResult result;
                 switch (content[index])

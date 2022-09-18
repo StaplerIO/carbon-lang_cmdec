@@ -13,7 +13,7 @@ namespace CommandDecoder.Decoder
         {
             stream = stream[baseIndex..];
 
-            return new(1 + metadata.AddressAlignment, new CommandTableEntry
+            return new(1 + 1 + metadata.AddressAlignment + 1, new CommandTableEntry
             {
                 Location = baseIndex,
                 RawData = stream[0..(1 + metadata.AddressAlignment)],

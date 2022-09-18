@@ -13,11 +13,28 @@ namespace CommandDecoder.Decoder
         {
             stream = stream[baseIndex..];
 
-            return new(1 + metadata.DataAlignment, new CommandTableEntry
+            string dataType;
+            switch (stream[2])
+            {
+                case 0x00:
+                    dataType = "an instant value";
+                    break;
+                case 0x01:
+                    dataType = "a local variable";
+                    break;
+                case 0x03:
+                    dataType = "a string from constant pool";
+                    break;
+                default:
+                    dataType = "<unknown>";
+                    break;
+            }
+
+            return new(1 + 1 + metadata.DataAlignment, new CommandTableEntry
             {
                 Location = baseIndex,
-                RawData = stream[0..(metadata.DataAlignment + 1)],
-                Description = $"Push data to stack"
+                RawData = stream[0..(1 + 1 + metadata.DataAlignment)],
+                Description = $"Push {dataType} to stack top"
             });
         }
 
