@@ -10,8 +10,8 @@ namespace CommandDecoder.Models
     {
         public int Location { get; set; }
 
-        public byte[] RawData { get; set; }
+        public byte[] RawData { get; set; } = new byte[1];
 
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
     }
 }
