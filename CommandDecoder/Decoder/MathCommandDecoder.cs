@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace CommandDecoder.Decoder
 {
-    public class MathCommandDecoder
+    internal class MathCommandDecoder
     {
-        public static DecodeResult DecodeCalcCommand(byte[] stream, int baseIndex)
+        internal static DecodeResult DecodeCalcCommand(byte[] stream, int baseIndex)
         {
             stream = stream[baseIndex..];
 
@@ -62,7 +62,7 @@ namespace CommandDecoder.Decoder
             }
         }
 
-        public static DecodeResult DecodeLogicalCommand(byte[] stream, int baseIndex)
+        internal static DecodeResult DecodeLogicalCommand(byte[] stream, int baseIndex)
         {
             stream = stream[baseIndex..];
 

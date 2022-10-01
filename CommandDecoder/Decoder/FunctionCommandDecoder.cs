@@ -9,7 +9,7 @@ namespace CommandDecoder.Decoder
 {
     internal class FunctionCommandDecoder
     {
-        public static DecodeResult EnterFunction(byte[] stream, PackageMetadata metadata, int baseIndex)
+        internal static DecodeResult EnterFunction(byte[] stream, PackageMetadata metadata, int baseIndex)
         {
             stream = stream[baseIndex..];
 
@@ -21,7 +21,7 @@ namespace CommandDecoder.Decoder
             });
         }
 
-        public static DecodeResult LeaveFunctionWithoutValue(byte[] stream, int baseIndex)
+        internal static DecodeResult LeaveFunctionWithoutValue(byte[] stream, int baseIndex)
         {
             stream = stream[baseIndex..];
 
@@ -33,7 +33,7 @@ namespace CommandDecoder.Decoder
             });
         }
 
-        public static DecodeResult LeaveFunctionWithValue(byte[] stream, int baseIndex)
+        internal static DecodeResult LeaveFunctionWithValue(byte[] stream, int baseIndex)
         {
             stream = stream[baseIndex..];
 

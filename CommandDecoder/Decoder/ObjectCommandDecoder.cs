@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace CommandDecoder.Decoder
 {
-    public class ObjectCommandDecoder
+    internal class ObjectCommandDecoder
     {
-        public static DecodeResult CreateObjectDecoder(byte[] stream, int baseIndex)
+        internal static DecodeResult CreateObjectDecoder(byte[] stream, int baseIndex)
         {
             stream = stream[baseIndex..];
 
@@ -21,7 +21,7 @@ namespace CommandDecoder.Decoder
             });
         }
 
-        public static DecodeResult DestroyObjectDecoder(byte[] stream, PackageMetadata metadata, int baseIndex)
+        internal static DecodeResult DestroyObjectDecoder(byte[] stream, PackageMetadata metadata, int baseIndex)
         {
             stream = stream[baseIndex..];
 

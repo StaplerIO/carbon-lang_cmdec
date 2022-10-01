@@ -9,7 +9,7 @@ namespace CommandDecoder.Decoder
 {
     internal class DomainCommandDecoder
     {
-        public static DecodeResult CreateDomainCommand(byte[] stream, PackageMetadata metadata, int baseIndex)
+        internal static DecodeResult CreateDomainCommand(byte[] stream, PackageMetadata metadata, int baseIndex)
         {
             stream = stream[baseIndex..];
 
@@ -21,7 +21,7 @@ namespace CommandDecoder.Decoder
             });
         }
 
-        public static DecodeResult DestroyDomainCommand(byte[] stream, PackageMetadata metadata, int baseIndex)
+        internal static DecodeResult DestroyDomainCommand(byte[] stream, PackageMetadata metadata, int baseIndex)
         {
             stream = stream[baseIndex..];
 

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace CommandDecoder.Decoder
 {
-    public class StackCommandDecoder
+    internal class StackCommandDecoder
     {
-        public static DecodeResult PushCommand(byte[] stream, PackageMetadata metadata, int baseIndex)
+        internal static DecodeResult PushCommand(byte[] stream, PackageMetadata metadata, int baseIndex)
         {
             stream = stream[baseIndex..];
 
@@ -38,7 +38,7 @@ namespace CommandDecoder.Decoder
             });
         }
 
-        public static DecodeResult PushFromObjectCommand(byte[] stream, PackageMetadata metadata, int baseIndex)
+        internal static DecodeResult PushFromObjectCommand(byte[] stream, PackageMetadata metadata, int baseIndex)
         {
             stream = stream[baseIndex..];
 
@@ -50,7 +50,7 @@ namespace CommandDecoder.Decoder
             });
         }
 
-        public static DecodeResult PopToObjectCommand(byte[] stream, PackageMetadata metadata, int baseIndex)
+        internal static DecodeResult PopToObjectCommand(byte[] stream, PackageMetadata metadata, int baseIndex)
         {
             stream = stream[baseIndex..];
 
@@ -62,7 +62,7 @@ namespace CommandDecoder.Decoder
             });
         }
 
-        public static DecodeResult PopCommand(byte[] stream, PackageMetadata metadata, int baseIndex)
+        internal static DecodeResult PopCommand(byte[] stream, PackageMetadata metadata, int baseIndex)
         {
             stream = stream[baseIndex..];
 
