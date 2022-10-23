@@ -49,7 +49,7 @@ namespace CommandDecoder.Decoder
                 result = result * 0x10 + b;
             }
 
-            if (raw[0] == 0x02)
+            if (raw[0] == 0x0B)
             {
                 result = -result;
             }
