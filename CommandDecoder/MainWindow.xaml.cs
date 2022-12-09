@@ -40,11 +40,13 @@ namespace CommandDecoder
         private void OpenPackageButton_Click(object sender, RoutedEventArgs e)
         {
             StatusBarText.Text = "Opening file...";
-            var dialog = new OpenFileDialog();
-            dialog.Filter = "Carbon package|*.cbp";
+            var dialog = new OpenFileDialog
+            {
+                Filter = "Carbon package|*.cbp"
+            };
             dialog.ShowDialog();
 
-            if (dialog.FileName != null)
+            if (!string.IsNullOrWhiteSpace(dialog.FileName))
             {
                 var fileContent = File.ReadAllBytes(dialog.FileName);
 
