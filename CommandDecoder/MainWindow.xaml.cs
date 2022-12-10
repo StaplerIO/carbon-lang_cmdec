@@ -5,6 +5,8 @@ using System;
 using System.Data;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace CommandDecoder
 {
@@ -117,6 +119,21 @@ namespace CommandDecoder
                           $"Entry point address: {packageMetadata.EntryPointAddress} \n" +
                           $"Domain layer count alignment: {packageMetadata.DomainLayerCountAlignment}"
             }.ShowDialog();
+        }
+
+        private void Expander_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (!e.Handled)
+            {
+                e.Handled = true;
+                var eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta)
+                {
+                    RoutedEvent = MouseWheelEvent,
+                    Source = sender
+                };
+
+                ContentTableScrollViewer.RaiseEvent(eventArg);
+            }
         }
     }
 }

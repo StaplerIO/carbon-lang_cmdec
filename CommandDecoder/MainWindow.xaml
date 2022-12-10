@@ -26,17 +26,19 @@
                     <TextBlock x:Name="StatusBarText">Ready</TextBlock>
                 </StatusBarItem>
             </StatusBar>
-            <StackPanel Orientation="Vertical" CanVerticallyScroll="True">
-                <Expander Header="Metadata" IsExpanded="False">
-                    <DataGrid x:Name="MetadataDataGrid" FontFamily="Consolas" CanUserAddRows="False" IsReadOnly="True"/>
-                </Expander>
-                <Expander Header="Function table" IsExpanded="False">
-                    <DataGrid x:Name="FunctionTableDataGrid" FontFamily="Consolas" CanUserAddRows="False" IsReadOnly="True"/>
-                </Expander>
-                <Expander Header="Commands" IsExpanded="True">
-                    <DataGrid x:Name="CommandDataGrid" FontFamily="Consolas" CanUserAddRows="False" IsReadOnly="True"/>
-                </Expander>
-            </StackPanel>
+            <ScrollViewer x:Name="ContentTableScrollViewer">
+                <StackPanel Orientation="Vertical" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True" PreviewMouseWheel="Expander_PreviewMouseWheel">
+                    <Expander Header="Metadata" IsExpanded="False">
+                        <DataGrid x:Name="MetadataDataGrid" FontFamily="Consolas" CanUserAddRows="False" IsReadOnly="True"/>
+                    </Expander>
+                    <Expander Header="Function table" IsExpanded="False" ScrollViewer.CanContentScroll="True" PreviewMouseWheel="Expander_PreviewMouseWheel">
+                        <DataGrid x:Name="FunctionTableDataGrid" FontFamily="Consolas" CanUserAddRows="False" IsReadOnly="True"/>
+                    </Expander>
+                    <Expander Header="Commands" IsExpanded="True" ScrollViewer.CanContentScroll="True" PreviewMouseWheel="Expander_PreviewMouseWheel">
+                        <DataGrid x:Name="CommandDataGrid" FontFamily="Consolas" CanUserAddRows="False" IsReadOnly="True"/>
+                    </Expander>
+                </StackPanel>
+            </ScrollViewer>
         </DockPanel>
     </Grid>
 </Window>
