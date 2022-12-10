@@ -15,6 +15,8 @@ namespace CommandDecoder
     {
         private PackageMetadata packageMetadata;
         private readonly DataTable commandTable;
+        private readonly DataTable metadataTable;
+        private readonly DataTable functionTable;
 
         public MainWindow()
         {
@@ -26,8 +28,17 @@ namespace CommandDecoder
             commandTable.Columns.Add("Location");
             commandTable.Columns.Add("Command");
             commandTable.Columns.Add("Description");
-
             CommandDataGrid.ItemsSource = commandTable.DefaultView;
+            
+            metadataTable = new DataTable();
+            metadataTable.Columns.Add("Property");
+            metadataTable.Columns.Add("Value");
+            MetadataDataGrid.ItemsSource = metadataTable.DefaultView;
+
+            functionTable = new DataTable();
+            functionTable.Columns.Add("Index");
+            functionTable.Columns.Add("Entry point");
+            FunctionTableDataGrid.ItemsSource = functionTable.DefaultView;
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -48,16 +59,17 @@ namespace CommandDecoder
 
             if (!string.IsNullOrWhiteSpace(dialog.FileName))
             {
+                // Update title bar
+                Title = $"CommandDecoder - {dialog.SafeFileName}";
+
                 var fileContent = File.ReadAllBytes(dialog.FileName);
 
                 StatusBarText.Text = "Decoding commands...";
-                packageMetadata = CbpManager.ReadMetadata(fileContent);
-
-                var decodedCommands = CbpManager.DecodeCommands(fileContent[packageMetadata.EntryPointAddress..], packageMetadata);
+                var result = CbpManager.DecodePackage(fileContent);
 
                 // Update command table
                 commandTable.Clear();
-                decodedCommands.ForEach(command =>
+                foreach (var command in result.CommandTable)
                 {
                     string rawData = "";
                     foreach (var item in command.RawData)
@@ -68,7 +80,23 @@ namespace CommandDecoder
                     }
 
                     commandTable.Rows.Add($"0x{Convert.ToString(command.Location, 16).PadLeft(8, '0')} ({command.Location})", $"{rawData.ToUpper()}", command.Description);
-                });
+                }
+
+                // Update metadata table
+                metadataTable.Clear();
+                var metadataDisplayList = result.Metadata.GetMetadataList();
+                foreach (var metadata in metadataDisplayList)
+                {
+                    metadataTable.Rows.Add(metadata.Key, metadata.Value);
+                }
+
+                // Update function table
+                functionTable.Clear();
+                foreach(var function in result.FunctionTable)
+                {
+                    functionTable.Rows.Add(function.FunctionId.ToString(), $"0x{string.Format("{0:x8}", function.EntryPointAddress)} ({function.EntryPointAddress})");
+                }
+                
 
                 StatusBarText.Text = "Ready";
             }

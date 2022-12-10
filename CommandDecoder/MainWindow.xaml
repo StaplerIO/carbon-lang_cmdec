@@ -22,11 +22,21 @@
             </Menu>
 
             <StatusBar Background="#006CBE" Foreground="White" DockPanel.Dock="Bottom">
-                    <StatusBarItem>
-                        <TextBlock x:Name="StatusBarText">Ready</TextBlock>
-                    </StatusBarItem>
+                <StatusBarItem>
+                    <TextBlock x:Name="StatusBarText">Ready</TextBlock>
+                </StatusBarItem>
             </StatusBar>
-            <DataGrid x:Name="CommandDataGrid" FontFamily="Consolas" CanUserAddRows="False" IsReadOnly="True"></DataGrid>
+            <StackPanel Orientation="Vertical" CanVerticallyScroll="True">
+                <Expander Header="Metadata" IsExpanded="False">
+                    <DataGrid x:Name="MetadataDataGrid" FontFamily="Consolas" CanUserAddRows="False" IsReadOnly="True"/>
+                </Expander>
+                <Expander Header="Function table" IsExpanded="False">
+                    <DataGrid x:Name="FunctionTableDataGrid" FontFamily="Consolas" CanUserAddRows="False" IsReadOnly="True"/>
+                </Expander>
+                <Expander Header="Commands" IsExpanded="True">
+                    <DataGrid x:Name="CommandDataGrid" FontFamily="Consolas" CanUserAddRows="False" IsReadOnly="True"/>
+                </Expander>
+            </StackPanel>
         </DockPanel>
     </Grid>
 </Window>

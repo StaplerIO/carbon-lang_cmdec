@@ -41,13 +41,9 @@ namespace CommandDecoder.Decoder
             });
         }
 
-        internal static long CalculateRelativeAddress(byte[] raw, int addrLen)
+        private static long CalculateRelativeAddress(byte[] raw, int addrLen)
         {
-            long result = 0;
-            foreach (byte b in raw[1..(addrLen + 1)])
-            {
-                result = result * 0x10 + b;
-            }
+            long result = Utils.ByteToInt64WithArrayLen(raw[1..], addrLen);
 
             if (raw[0] == 0x0B)
             {

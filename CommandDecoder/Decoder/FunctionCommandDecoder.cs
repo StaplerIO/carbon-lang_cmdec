@@ -16,7 +16,7 @@ namespace CommandDecoder.Decoder
             return new(1 + 1 + metadata.AddressAlignment + 1, new CommandTableEntry
             {
                 Location = baseIndex,
-                RawData = stream[0..(1 + metadata.AddressAlignment)],
+                RawData = stream[0..(1 + 1 + metadata.AddressAlignment)],
                 Description = "Enter function"
             });
         }
